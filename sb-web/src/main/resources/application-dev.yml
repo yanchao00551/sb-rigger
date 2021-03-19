@@ -1,0 +1,16 @@
+# Server settings
+server:
+  tomcat:
+    basedir: /var/tmp/website
+
+# SPRING PROFILES
+spring:
+  profiles:
+    include: [center-dev]
+  # 指定默认MimeMessage的编码，默认为: UTF-8
+
+
+
+
+
+####################################自定义配=置##########################################
