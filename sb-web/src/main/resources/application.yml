@@ -36,11 +36,27 @@ spring:
 
 # MyBatis
 mybatis:
-  type-aliases-package: com.ebaycloud.sbcore.persistence.beans
   mapper-locations: classpath:/mybatis/*.xml
+  type-aliases-package: com.ebaycloud.rigger.persistence.beans
+
+
+
+#showSql
+logging:
+  level:
+    com:
+      debug
+
 # mapper
 mapper:
   mappers:
     - com.ebaycloud.rigger.plugin.BaseMapper
   not-empty: false
   identity: MYSQL
+
+# pagehelper
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

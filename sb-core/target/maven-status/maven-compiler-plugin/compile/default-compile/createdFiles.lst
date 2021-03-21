@@ -1,0 +1,17 @@
+com\ebaycloud\rigger\business\vo\ArticleConditionVO.class
+com\ebaycloud\rigger\persistence\beans\BizType.class
+com\ebaycloud\rigger\framework\object\PageResult.class
+com\ebaycloud\rigger\business\entity\Article.class
+com\ebaycloud\rigger\business\enums\ResponseStatus.class
+com\ebaycloud\rigger\util\ResultUtil.class
+com\ebaycloud\rigger\business\consts\CommonConst.class
+com\ebaycloud\rigger\framework\object\AbstractService.class
+com\ebaycloud\rigger\framework\object\ResponseVO.class
+com\ebaycloud\rigger\persistence\mapper\BizArticleMapper.class
+com\ebaycloud\rigger\business\service\impl\BizArticleServiceImpl.class
+com\ebaycloud\rigger\business\service\BizArticleService.class
+com\ebaycloud\rigger\framework\object\BaseConditionVO.class
+com\ebaycloud\rigger\plugin\BaseMapper.class
+com\ebaycloud\rigger\framework\object\AbstractDO.class
+com\ebaycloud\rigger\persistence\beans\BizArticle.class
+com\ebaycloud\rigger\persistence\beans\BizTags.class

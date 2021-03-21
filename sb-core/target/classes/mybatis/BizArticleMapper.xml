@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ebaycloud.rigger.persistence.mapper.BizArticleMapper">
+
+    <resultMap id="rm" type="com.ebaycloud.rigger.persistence.beans.BizArticle">
+        <result property="id" jdbcType="BIGINT" column="id"/>
+        <result property="title" jdbcType="VARCHAR" column="title"/>
+        <result property="userId" jdbcType="BIGINT" column="user_id"/>
+        <result property="coverImage" jdbcType="VARCHAR" column="cover_image"/>
+        <result property="qrcodePath" jdbcType="VARCHAR" column="qrcode_path"/>
+        <result property="isMarkdown" jdbcType="BIT" column="is_markdown"/>
+        <result property="content" jdbcType="VARCHAR" column="content"/>
+        <result property="contentMd" jdbcType="VARCHAR" column="content_md"/>
+        <result property="typeId" jdbcType="BIGINT" column="type_id"/>
+        <result property="status" jdbcType="INTEGER" column="status"/>
+        <result property="top" jdbcType="BIT" column="top"/>
+        <result property="recommended" jdbcType="BIT" column="recommended"/>
+        <result property="original" jdbcType="BIT" column="original"/>
+        <result property="description" jdbcType="VARCHAR" column="description"/>
+        <result property="keywords" jdbcType="VARCHAR" column="keywords"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
+        <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
+        <result property="comment" jdbcType="BIT" column="comment"/>
+    </resultMap>
+
+    <select id="findPageBreakByCondition" parameterType="com.ebaycloud.rigger.business.vo.ArticleConditionVO" resultMap="rm">
+        SELECT
+        a.id,
+        a.title,
+        a.user_id,
+        a.cover_image,
+        a.qrcode_path,
+        a.is_markdown,
+        a.top,
+        a.type_id,
+        a.`status`,
+        a.recommended,
+        a.original,
+        a.description,
+        a.keywords,
+        a.`comment`,
+        a.create_time,
+        a.update_time
+        FROM
+        biz_article a
+        WHERE 1 = 1
+        GROUP BY a.id
+    </select>
+
+</mapper>

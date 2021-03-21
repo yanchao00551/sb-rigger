@@ -1,0 +1,17 @@
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\persistence\beans\BizArticle.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\util\ResultUtil.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\framework\object\PageResult.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\business\service\BizArticleService.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\persistence\mapper\BizArticleMapper.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\plugin\BaseMapper.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\persistence\beans\BizTags.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\business\entity\Article.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\business\consts\CommonConst.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\business\service\impl\BizArticleServiceImpl.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\framework\object\ResponseVO.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\framework\object\AbstractService.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\business\vo\ArticleConditionVO.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\framework\object\BaseConditionVO.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\business\enums\ResponseStatus.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\framework\object\AbstractDO.java
+D:\working\sb-rigger\sb-core\src\main\java\com\ebaycloud\rigger\persistence\beans\BizType.java

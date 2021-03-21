@@ -1,6 +1,6 @@
 package com.ebaycloud.rigger.plugin;
 
-import com.ebaycloud.rigger.persistence.beans.BaseEntity;
+import com.ebaycloud.rigger.framework.object.AbstractDO;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;
 
@@ -12,6 +12,6 @@ import tk.mybatis.mapper.common.MySqlMapper;
  * @return 
  **/
 
-public interface BaseMapper<T extends BaseEntity> extends Mapper<T>, MySqlMapper<T> {
+public interface BaseMapper<T extends AbstractDO> extends Mapper<T>, MySqlMapper<T> {
     // 特别注意，该接口不能被扫描到，否则会出错
 }
