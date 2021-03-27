@@ -34,6 +34,7 @@
 
             </ol>
         </div>
+
         <#include "/layout/sidebar.ftl"/>
     </div>
 
