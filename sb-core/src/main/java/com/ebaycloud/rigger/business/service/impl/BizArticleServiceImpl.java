@@ -60,10 +60,9 @@ public class BizArticleServiceImpl implements BizArticleService {
         for(BizArticle bizArticle:list){
             boList.add(new Article(bizArticle));
         }
-        PageInfo bean = new PageInfo<BizArticle>(list);
-        bean.setList(boList);
+        PageInfo bean = new PageInfo<BizArticle>(list);//指定返回的分页数据格式
 
-        String s = "hello_world";
+        bean.setList(boList);  //设置最终结果集合，程序会调用Article的getter方法映射到BizArticle的属性中去
 
         return bean;
     }

@@ -57,9 +57,6 @@ public class Article {
         return bizArticle.getComment();
     }
 
-    public void setKeywords(String keywords) {
-        bizArticle.setKeywords(keywords);
-    }
 
     public void setQrcodePath(String qrcodePath) {
         bizArticle.setQrcodePath(qrcodePath);
@@ -93,9 +90,6 @@ public class Article {
         return bizArticle.getRecommended();
     }
 
-    public String getKeywords() {
-        return bizArticle.getKeywords();
-    }
 
     public void setTags(List<BizTags> tags) {
         bizArticle.setTags(tags);
@@ -197,5 +191,13 @@ public class Article {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
     public Date getUpdateTime() {
         return bizArticle.getUpdateTime();
+    }
+
+    public String getKeywords() {
+        return bizArticle.getKeywords();
+    }
+
+    public void setKeywords(String keywords) {
+        bizArticle.setKeywords(keywords);
     }
 }
