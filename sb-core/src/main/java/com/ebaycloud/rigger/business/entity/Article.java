@@ -37,6 +37,22 @@ public class Article {
         this.bizArticle = bizArticle;
     }
 
+    public Integer getLookCount() {
+        return bizArticle.getLookCount();
+    }
+
+    public Integer getCommentCount() {
+        return bizArticle.getCommentCount();
+    }
+
+    public void setLookCount(Integer lookCount) {
+        bizArticle.setLookCount(lookCount);
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        bizArticle.setCommentCount(commentCount);
+    }
+
     public List<BizTags> getTags() {
         return bizArticle.getTags();
     }

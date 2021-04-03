@@ -22,30 +22,60 @@
         <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
         <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
         <result property="comment" jdbcType="BIT" column="comment"/>
+        
+        <collection property="tags" column="tag_id" javaType="ArrayList"
+                    ofType="com.ebaycloud.rigger.persistence.beans.BizTags">
+            <result property="id" jdbcType="BIGINT" column="tag_id"></result>
+            <result property="name" jdbcType="VARCHAR" column="tag_name"></result>
+            <result property="description" jdbcType="VARCHAR" column="tag_description"></result>
+        </collection>
+
+
     </resultMap>
 
-    <select id="findPageBreakByCondition" parameterType="com.ebaycloud.rigger.business.vo.ArticleConditionVO" resultMap="rm">
-        SELECT
-        a.id,
-        a.title,
-        a.user_id,
-        a.cover_image,
-        a.qrcode_path,
-        a.is_markdown,
-        a.top,
-        a.type_id,
-        a.`status`,
-        a.recommended,
-        a.original,
-        a.description,
-        a.keywords,
-        a.`comment`,
-        a.create_time,
-        a.update_time
-        FROM
-        biz_article a
+    <select id="findPageBreakByCondition" parameterType="com.ebaycloud.rigger.business.vo.ArticleConditionVO"
+            resultMap="rm">
+        SELECT a.id,
+               a.title,
+               a.user_id,
+               a.cover_image,
+               a.qrcode_path,
+               a.is_markdown,
+               a.top,
+               a.type_id,
+               a.`status`,
+               a.recommended,
+               a.original,
+               a.description,
+               a.keywords,
+               a.`comment`,
+               a.create_time,
+               a.update_time
+        FROM biz_article a
         WHERE 1 = 1
         GROUP BY a.id
+    </select>
+
+    <select id="listTagsByArticleId" resultMap="rm" parameterType="List">
+        SELECT
+        a.id,
+        t.id AS tag_id,
+        t.name AS tag_name,
+        t.description AS tag_description
+        FROM
+        biz_article AS a
+        INNER JOIN biz_article_tags AS atag
+        ON a.id = atag.article_id
+        INNER JOIN biz_tags AS t
+        ON atag.tag_id = t.id
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="list != null">
+                AND a.id IN
+                <foreach collection="list" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </trim>
     </select>
 
 </mapper>

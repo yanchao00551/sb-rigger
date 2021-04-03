@@ -18,7 +18,7 @@ import java.util.Date;
  * @email: 10947@163.com
  */
 
-@Data // getter、setter
+@Data
 @EqualsAndHashCode(callSuper = false)
 public abstract class AbstractDO implements Serializable{
 

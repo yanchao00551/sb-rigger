@@ -8,6 +8,7 @@ import javax.persistence.Transient;
 import java.util.List;
 
 /**
+ * 每行实体的javabean，如果存在相关依赖关系，增加其他javabean作为属性
  * @PackageName:com.ebaycloud.rigger.persistence.beans
  * @ClassName:BizArticle
  * @Description:
@@ -18,8 +19,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class BizArticle extends AbstractDO {
+
     @Transient
     List<BizTags> tags;
+    @Transient
     BizType bizType;
 
     private String title;
@@ -38,7 +41,9 @@ public class BizArticle extends AbstractDO {
     private String keywords;
     private Boolean comment;
 
-
-
+    @Transient
+    private Integer lookCount;
+    @Transient
+    private  Integer commentCount;
 
 }

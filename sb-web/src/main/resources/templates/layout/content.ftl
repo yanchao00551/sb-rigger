@@ -1,36 +1,47 @@
-<section class="container content">
+<section class="container content" xmlns="http://www.w3.org/1999/html">
     <div class="columns">
         <div class="column two-thirds">
             <ol class="repo-list">
-                <li class="repo-list-item">
-                    <h3 class="repo-list-name"> <a
-                                href="https://ebay-cloud.com/2020/05/03/blog-template-qna/"><span
-                                    class="top-most-flag">[置顶]</span>标题11111111111111111111 Q & A</a></h3>
-                    <p class="repo-list-description"> 使用这个博客模板的朋友们</p>
-                    <p class="repo-list-meta"> <span class="meta-info"> <span
-                                    class="octicon octicon-calendar"></span> 2020/05/03 </span> <span
-                                class="meta-info"> <span class="octicon octicon-file-directory"></span> <a
-                                    href="https://ebay-cloud.com/categories/#GitHub" title="GitHub">GitHub</a>
-										</span>
+                <#if page.list?? && (page.list?size >0)>
+                    <#list page.list as item>
+                        <li class="repo-list-item">
+                            <h3 class="repo-list-name">
+                                <a href="#url">${item.title}</a>
+                            </h3>
+                            <p class="repo-list-description">${item.description}</p>
+                            <p class="repo-list-meta">
 
-                        <span><a href="#">浏览(3)</a></span>
-                        <span<a href="#">评论(0)</a></span>
+                                <span class="meta-info">
+                                    <span class="octicon octicon-calendar"></span>
+                                    ${item.createTime?string('yyyy-MM-dd')}
+                                </span>
 
+                                <#if item.tags?? &&(item.tags?size>0)>
+                                    <#list item.tags as tag>
+                                        <span class="meta-info">
+                                        <span class="octicon octicon-file-directory"></span>
+                                        <a href="https://ebay-cloud.com/categories/#${tag.name}" title="${tag.name}">${tag.name}</a>
+                                        </span>
+                                    </#list>
+                                <#else>
+                                    <span class="meta-info">
+                                    <span class="octicon octicon-file-directory"></span>
+                                    <a href="#tags" title="无标签">无标签</a>
+                                </span>
+                                </#if>
 
-                    </p>
-                </li>
-                <li class="repo-list-item">
-                    <h3 class="repo-list-name">
-                        <a href="https://ebay-cloud.com/2021/03/13/talk-about-threadsafe-with-arraylist/">标题2222222222222</a></h3>
-                    <p class="repo-list-description"> 更新： 此文发</p>
-                    <p class="repo-list-meta"> <span class="meta-info"> <span
-                                    class="octicon octicon-calendar"></span> 2021/03/13 </span> <span
-                                class="meta-info"> <span class="octicon octicon-file-directory"></span> <a
-                                    href="https://ebay-cloud.com/categories/#Java" title="Java">Java</a> </span>
-                        <span><a href="#">浏览(3)</a></span>
-                        <span<a href="#">评论(0)</a></span>
-                    </p>
-                </li>
+                                <span><a href="#">浏览(${item.lookCount})</a></span>
+                                <span<a href="#">评论(${item.commentCount})</a></span>
+
+                            </p>
+                        </li>
+                    </#list>
+                <#else>
+                    <li class="repo-list-item">
+                        <h3 class="repo-list-name">亲，啥也没找到啊~</h3>
+                    </li>
+                </#if>
+
 
             </ol>
         </div>

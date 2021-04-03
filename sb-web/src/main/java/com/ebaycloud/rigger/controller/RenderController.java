@@ -1,6 +1,7 @@
 package com.ebaycloud.rigger.controller;
 
 import com.ebaycloud.rigger.business.entity.Article;
+import com.ebaycloud.rigger.business.enums.ArticleStatusEnum;
 import com.ebaycloud.rigger.business.service.BizArticleService;
 import com.ebaycloud.rigger.business.vo.ArticleConditionVO;
 import com.ebaycloud.rigger.util.ResultUtil;
@@ -27,6 +28,7 @@ public class RenderController {
     private BizArticleService bizArticleService;
 
     private void loadIndexPage(ArticleConditionVO vo, Model model) {
+        vo.setStatus(ArticleStatusEnum.PUBLISHED.getCode());
         PageInfo<Article> pageInfo = bizArticleService.findPageBreakByCondition(vo);
         model.addAttribute("page", pageInfo);
         model.addAttribute("model", vo);

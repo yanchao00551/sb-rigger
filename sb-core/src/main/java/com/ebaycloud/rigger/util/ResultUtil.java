@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/*
- * @Author 悟空
- * @Description //TODO 接口返回工具类，支持ModelAndView、ResponseVO、PageResult
- * @Date 18:18 2021/3/18
- * @Param
- * @return
- **/
+/***
+ *
+ * @author 悟空
+ * @description //TODO 
+ * @date 23:19 2021/4/2
+ * @param null
+ * @return null
+ */
 public class ResultUtil {
 
     public static ModelAndView view(String view) {

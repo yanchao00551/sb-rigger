@@ -1,26 +1,21 @@
 package com.ebaycloud.rigger.business.vo;
 
-import com.ebaycloud.rigger.business.entity.Article;
 import com.ebaycloud.rigger.framework.object.BaseConditionVO;
+import com.ebaycloud.rigger.persistence.beans.BizArticleLook;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 文章条件视图
  * @PackageName:com.ebaycloud.rigger.business.vo
- * @ClassName:ArticleConditionVO
+ * @ClassName:ArticleLookVO
  * @Description:
  * @author: 悟空
- * @date: 2021/3/20 22:40
+ * @date: 2021/4/3 0:13
  * @email: 10947@163.com
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ArticleConditionVO extends BaseConditionVO {
-    private Article article;
-    private Long typeId;
-    private Integer status;
-
-
+public class ArticleLookVO extends BaseConditionVO {
+    private BizArticleLook bizArticleLook;
 
 }

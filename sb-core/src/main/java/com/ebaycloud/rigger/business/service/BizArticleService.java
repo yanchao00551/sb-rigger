@@ -14,5 +14,13 @@ import com.github.pagehelper.PageInfo;
  * @email: 10947@163.com
  */
 public interface BizArticleService extends AbstractService<Article,Long> {
+    /**
+     * 分页查询
+     * @author 悟空
+     * @description //TODO 
+     * @date 23:17 2021/4/2
+     * @param vo
+     * @return com.github.pagehelper.PageInfo<com.ebaycloud.rigger.business.entity.Article>
+     */
     PageInfo<Article> findPageBreakByCondition(ArticleConditionVO vo);
 }

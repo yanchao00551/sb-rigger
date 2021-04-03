@@ -15,7 +15,6 @@ import java.util.List;
  * @date: 2021/3/20 21:57
  * @email: 10947@163.com
  */
-
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class BizType extends AbstractDO {
