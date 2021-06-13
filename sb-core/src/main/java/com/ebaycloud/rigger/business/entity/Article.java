@@ -1,5 +1,6 @@
 package com.ebaycloud.rigger.business.entity;
 
+import com.ebaycloud.rigger.business.enums.ArticleStatusEnum;
 import com.ebaycloud.rigger.persistence.beans.BizArticle;
 import com.ebaycloud.rigger.persistence.beans.BizTags;
 import com.ebaycloud.rigger.persistence.beans.BizType;
@@ -21,6 +22,17 @@ public class Article {
 
     private BizArticle bizArticle;
 
+    public Integer getLoveCount() {
+        return bizArticle.getLoveCount();
+    }
+
+    public void setLoveCount(Integer loveCount) {
+        bizArticle.setLoveCount(loveCount);
+    }
+
+    public ArticleStatusEnum getStatusEnum() {
+        return ArticleStatusEnum.get(this.bizArticle.getStatus());
+    }
 
     @JsonIgnore
     public BizArticle getBizArticle() {
@@ -78,7 +90,7 @@ public class Article {
         bizArticle.setQrcodePath(qrcodePath);
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         bizArticle.setStatus(status);
     }
 
@@ -90,7 +102,7 @@ public class Article {
         return bizArticle.getTitle();
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return bizArticle.getStatus();
     }
 

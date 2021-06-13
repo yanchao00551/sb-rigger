@@ -34,7 +34,7 @@ public class BizArticle extends AbstractDO {
     private String contentMd;
     private Boolean top;
     private Long typeId;
-    private Boolean status;
+    private Integer status;
     private Boolean recommended;
     private Boolean original;
     private String description;
@@ -44,6 +44,8 @@ public class BizArticle extends AbstractDO {
     @Transient
     private Integer lookCount;
     @Transient
-    private  Integer commentCount;
+    private Integer commentCount;
+    @Transient
+    private Integer loveCount;
 
 }

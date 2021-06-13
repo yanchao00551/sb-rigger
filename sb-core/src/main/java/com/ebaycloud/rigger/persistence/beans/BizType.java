@@ -22,7 +22,7 @@ public class BizType extends AbstractDO {
     private String name;
     private String description;
     private Integer sort;
-    private boolean available;
+    private Boolean available;
     private String icon;
 
     /*

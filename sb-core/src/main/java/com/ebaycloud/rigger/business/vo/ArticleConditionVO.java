@@ -5,6 +5,8 @@ import com.ebaycloud.rigger.framework.object.BaseConditionVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 /**
  * 文章条件视图
  * @PackageName:com.ebaycloud.rigger.business.vo
@@ -19,8 +21,12 @@ import lombok.EqualsAndHashCode;
 public class ArticleConditionVO extends BaseConditionVO {
     private Article article;
     private Long typeId;
+    private Long tagId;
     private Integer status;
-
-
+    private Boolean top;
+    private Boolean recommended;
+    private Boolean original;
+    private Boolean random;
+    private List<Long> tagIds;
 
 }

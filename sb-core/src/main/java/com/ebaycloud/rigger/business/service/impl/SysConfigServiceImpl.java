@@ -1,5 +1,7 @@
 package com.ebaycloud.rigger.business.service.impl;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.ebaycloud.rigger.business.enums.ConfigKeyEnum;
 import com.ebaycloud.rigger.business.service.SysConfigService;
@@ -9,7 +11,10 @@ import com.ebaycloud.rigger.util.DateConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +57,39 @@ public class SysConfigServiceImpl implements SysConfigService {
             }
         }));
         return res;
+    }
+
+
+    @Override
+    public SysConfig getByKey(String key) {
+        if (StringUtils.isEmpty(key)) {
+            return null;
+        }
+        SysConfig sysConfig = new SysConfig();
+        sysConfig.setConfigKey(key);
+        return this.sysConfigMapper.selectOne(sysConfig);
+    }
+
+
+    @Override
+    public Map<String, Object> getSiteInfo() {
+        Map<String, Object> siteInfo = sysConfigMapper.getSiteInfo();
+        if (!CollectionUtils.isEmpty(siteInfo)) {
+            Date installdate = null;
+            SysConfig config = this.getByKey(ConfigKeyEnum.INSTALLDATE.getKey());
+            if (null == config || StringUtils.isEmpty(config.getConfigValue())) {
+                // 默认建站日期为2019-01-01
+                installdate = Date.from(LocalDate.of(2019, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant());
+            } else {
+                installdate = DateUtil.parse(config.getConfigValue(), DatePattern.NORM_DATETIME_PATTERN);
+            }
+            long between = 1;
+            if (!installdate.after(new Date())) {
+                between = DateUtil.between(installdate, new Date(), DateUnit.DAY);
+            }
+            siteInfo.put("installdate", between < 1 ? 1 : between);
+        }
+        return siteInfo;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.ebaycloud.rigger.business.service.impl;
 
 import com.ebaycloud.rigger.business.entity.Article;
+import com.ebaycloud.rigger.business.enums.ArticleStatusEnum;
 import com.ebaycloud.rigger.business.enums.CommentStatusEnum;
 import com.ebaycloud.rigger.business.service.BizArticleService;
 import com.ebaycloud.rigger.business.vo.ArticleConditionVO;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -61,13 +63,14 @@ public class BizArticleServiceImpl implements BizArticleService {
 
     @Override
     public Article getByPrimaryKey(Long primaryKey) {
-        return null;
+        return new Article(bizArticleMapper.selectByPrimaryKey(primaryKey));
     }
 
 
     @Override
     public PageInfo<Article> findPageBreakByCondition(ArticleConditionVO vo) {
-        PageHelper.startPage(vo.getPageStart(), vo.getPageSize());
+        PageHelper.startPage(vo.getPageNumber(), vo.getPageSize());
+        Integer i = vo.getPageStart();
         List<BizArticle> list = bizArticleMapper.findPageBreakByCondition(vo);
         //CollectionUtils是Spring框架提供的工具类
         if (CollectionUtils.isEmpty(list)) {
@@ -110,6 +113,91 @@ public class BizArticleServiceImpl implements BizArticleService {
         criteria.andEqualTo("sid",primaryKey);
         criteria.andEqualTo("status", CommentStatusEnum.APPROVED.toString());
         entity.setCommentCount(commentMapper.selectCountByExample(example));
+    }
+
+
+    /**
+     * 站长推荐
+     *
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Article> listRecommended(int pageSize) {
+        ArticleConditionVO vo = new ArticleConditionVO();
+        vo.setRecommended(true);
+        vo.setStatus(ArticleStatusEnum.PUBLISHED.getCode());
+        vo.setPageSize(pageSize);
+        PageInfo pageInfo = this.findPageBreakByCondition(vo);
+        return null == pageInfo ? null : pageInfo.getList();
+    }
+
+    /**
+     * 近期文章
+     *
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Article> listRecent(int pageSize) {
+        ArticleConditionVO vo = new ArticleConditionVO();
+        vo.setPageSize(pageSize);
+        vo.setStatus(ArticleStatusEnum.PUBLISHED.getCode());
+        PageInfo pageInfo = this.findPageBreakByCondition(vo);
+        return null == pageInfo ? null : pageInfo.getList();
+    }
+
+
+    /**
+     * 随机文章
+     *
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Article> listRandom(int pageSize) {
+        ArticleConditionVO vo = new ArticleConditionVO();
+        vo.setRandom(true);
+        vo.setStatus(ArticleStatusEnum.PUBLISHED.getCode());
+        vo.setPageSize(pageSize);
+        PageInfo pageInfo = this.findPageBreakByCondition(vo);
+        return null == pageInfo ? null : pageInfo.getList();
+    }
+
+    /**
+     * 获取热门文章
+     *
+     * @return
+     */
+    @Override
+    public List<Article> listHotArticle(int pageSize) {
+        PageHelper.startPage(1, pageSize);
+
+        List<BizArticle> entityList = bizArticleMapper.listHotArticle();
+        if (CollectionUtils.isEmpty(entityList)) {
+            return null;
+        }
+        List<Article> list = new ArrayList<>();
+        for (BizArticle entity : entityList) {
+            list.add(new Article(entity));
+        }
+        return list;
+    }
+
+    /**
+     * 获取分类下所有文章
+     * @author 悟空
+     * @description //TODO
+     * @date 19:21 2021/6/12
+     * @param typeId
+     * @return java.util.List<com.ebaycloud.rigger.persistence.beans.BizArticle>
+     */
+    @Override
+    public List<BizArticle> findTypeArticleList(Long typeId) {
+        Example example = new Example(BizArticle.class);
+        example.createCriteria().andEqualTo("typeId",typeId);
+        List<BizArticle> list = bizArticleMapper.selectByExample(example);
+        return list;
     }
 
 

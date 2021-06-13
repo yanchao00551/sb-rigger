@@ -22,7 +22,18 @@
         <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
         <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
         <result property="comment" jdbcType="BIT" column="comment"/>
-        
+
+
+        <result property="lookCount" jdbcType="INTEGER" column="look_count"/>
+        <result property="commentCount" jdbcType="INTEGER" column="comment_count"/>
+        <result property="loveCount" jdbcType="INTEGER" column="love_count"/>
+
+        <association property="bizType" javaType="com.ebaycloud.rigger.persistence.beans.BizType">
+            <result property="id" jdbcType="BIGINT" column="btype_id"/>
+            <result property="name" jdbcType="VARCHAR" column="btype_name"/>
+            <result property="description" jdbcType="VARCHAR" column="btype_description"/>
+        </association>
+
         <collection property="tags" column="tag_id" javaType="ArrayList"
                     ofType="com.ebaycloud.rigger.persistence.beans.BizTags">
             <result property="id" jdbcType="BIGINT" column="tag_id"></result>
@@ -35,25 +46,72 @@
 
     <select id="findPageBreakByCondition" parameterType="com.ebaycloud.rigger.business.vo.ArticleConditionVO"
             resultMap="rm">
-        SELECT a.id,
-               a.title,
-               a.user_id,
-               a.cover_image,
-               a.qrcode_path,
-               a.is_markdown,
-               a.top,
-               a.type_id,
-               a.`status`,
-               a.recommended,
-               a.original,
-               a.description,
-               a.keywords,
-               a.`comment`,
-               a.create_time,
-               a.update_time
-        FROM biz_article a
+        SELECT
+        a.id,
+        a.title,
+        a.user_id,
+        a.cover_image,
+        a.qrcode_path,
+        a.is_markdown,
+        a.top,
+        a.type_id,
+        a.`status`,
+        a.recommended,
+        a.original,
+        a.description,
+        a.keywords,
+        a.`comment`,
+        a.create_time,
+        a.update_time
+        FROM
+        biz_article a
+        INNER JOIN biz_article_tags atag ON a.id = atag.article_id
         WHERE 1 = 1
+        <if test="typeId != null">
+            AND	a.type_id = #{typeId}
+        </if>
+        <choose>
+            <when test="tagIds != null">
+                AND atag.tag_id IN (
+                <foreach collection="tagIds" item="tagId" separator=",">
+                    #{tagId}
+                </foreach>
+                )
+            </when>
+            <otherwise>
+                <if test="tagId != null">
+                    AND	atag.tag_id = #{tagId}
+                </if>
+            </otherwise>
+        </choose>
+        <if test="top != null">
+            AND	a.top = #{top}
+        </if>
+        <if test="status != null">
+            AND	a.status = #{status}
+        </if>
+        <if test="recommended != null">
+            AND	a.recommended = #{recommended}
+        </if>
+        <if test="keywords != null and keywords != '' ">
+            AND
+            (
+            a.description LIKE CONCAT('%',#{keywords , jdbcType=VARCHAR},'%') OR
+            a.keywords LIKE CONCAT('%',#{keywords , jdbcType=VARCHAR},'%')
+            )
+        </if>
         GROUP BY a.id
+        <choose>
+            <when test="random != null">
+                ORDER BY RAND()
+            </when>
+            <otherwise>
+                ORDER BY
+                a.top DESC,
+                a.recommended DESC,
+                a.create_time DESC
+            </otherwise>
+        </choose>
     </select>
 
     <select id="listTagsByArticleId" resultMap="rm" parameterType="List">
@@ -76,6 +134,54 @@
                 </foreach>
             </if>
         </trim>
+    </select>
+
+
+    <!-- 获取热门文章 -->
+    <select id="listHotArticle" resultMap="rm">
+        SELECT
+            a.id,
+            a.title,
+            a.user_id,
+            a.cover_image,
+            a.qrcode_path,
+            a.is_markdown,
+            a.top,
+            a.type_id,
+            a.`status`,
+            a.recommended,
+            a.original,
+            a.description,
+            a.keywords,
+            a.`comment`,
+            a.create_time,
+            a.update_time,
+            l.lookCount AS look_count,
+            c.commentCount AS comment_count
+        FROM
+            biz_article a
+                LEFT JOIN (
+                SELECT
+                    l.article_id,
+                    IFNULL(count(1), 0) AS lookCount
+                FROM
+                    biz_article_look l
+                GROUP BY
+                    l.article_id
+            ) l ON a.id = l.article_id
+                LEFT JOIN (
+                SELECT
+                    c.sid,
+                    IFNULL(count(1), 0) AS commentCount
+                FROM
+                    biz_comment c
+                WHERE c.`status` = 'APPROVED'
+                GROUP BY
+                    c.sid
+            ) c ON a.id = c.sid
+        WHERE a.status = 1
+        ORDER BY
+            l.lookCount DESC
     </select>
 
 </mapper>

@@ -4,7 +4,7 @@
 <footer class="container">
 
     <div class="site-footer" role="contentinfo">
-        <div class="copyright left mobile-block"> © 2021 <span title="Zhuang Ma">Yan Chao</span> <a
+        <div class="copyright left mobile-block"> © 2021 <span title="madu">Yan Chao</span> <a
                     href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a></div>
         <ul class="site-footer-links right mobile-hidden">
             <li> <a href="javascript:window.scrollTo(0,0)">TOP</a></li>
@@ -12,12 +12,12 @@
                 aria-label="view source code"> <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
         </a>
         <ul class="site-footer-links mobile-hidden">
-            <li> <a href="https://ebay-cloud.com/" title="首页" target="">首页</a></li>
-            <li> <a href="https://ebay-cloud.com/categories/" title="分类" target="">分类</a></li>
-            <li> <a href="https://ebay-cloud.com/wiki/" title="维基" target="">维基</a></li>
-            <li> <a href="https://ebay-cloud.com/links/" title="链接" target="">链接</a></li>
-            <li> <a href="https://ebay-cloud.com/about/" title="关于" target="">关于</a></li>
-            <li><a href="https://ebay-cloud.com/feed.xml"><span class="octicon octicon-rss"
+            <li> <a href="${config.siteUrl}/" title="首页" target="">首页</a></li>
+            <li> <a href="${config.siteUrl}/categories/" title="分类" target="">分类</a></li>
+            <li> <a href="${config.siteUrl}/wiki/" title="维基" target="">维基</a></li>
+            <li> <a href="${config.siteUrl}/links/" title="链接" target="">链接</a></li>
+            <li> <a href="${config.siteUrl}/about/" title="关于" target="">关于</a></li>
+            <li><a href="${config.siteUrl}/feed.xml"><span class="octicon octicon-rss"
                                                                 style="color:orange;"></span></a></li>
         </ul>
 

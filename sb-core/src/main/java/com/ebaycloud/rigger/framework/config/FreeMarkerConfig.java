@@ -1,6 +1,8 @@
 package com.ebaycloud.rigger.framework.config;
 
 import com.ebaycloud.rigger.business.service.SysConfigService;
+import com.ebaycloud.rigger.framework.tag.ArticleTags;
+import com.ebaycloud.rigger.framework.tag.CustomTags;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateModelException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,16 @@ public class FreeMarkerConfig {
 
     @Autowired
     private SysConfigService configService;
+    @Autowired
+    private CustomTags customTags;
+    @Autowired
+    private ArticleTags articleTags;
 
 
     @PostConstruct
     public void setSharedVariable() {
+        configuration.setSharedVariable("cloudTag",customTags);
+        configuration.setSharedVariable("articleTag", articleTags);
         try{
             configuration.setSharedVariable("config",configService.getConfigs());
         }catch (TemplateModelException e){

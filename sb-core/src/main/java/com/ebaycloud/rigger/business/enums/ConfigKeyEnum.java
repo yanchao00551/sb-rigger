@@ -18,6 +18,10 @@ public enum ConfigKeyEnum {
      * @return null
      */
     UPDATE_TIME("updateTime"),
+    /**
+     * 网站安装时间，默认为执行init_data.sql的时间
+     */
+    INSTALLDATE("installdate"),
     ;
     private String key;
 
@@ -28,4 +32,6 @@ public enum ConfigKeyEnum {
     public String getKey() {
         return key;
     }
+
+
 }

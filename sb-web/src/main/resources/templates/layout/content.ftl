@@ -6,7 +6,7 @@
                     <#list page.list as item>
                         <li class="repo-list-item">
                             <h3 class="repo-list-name">
-                                <a href="#url">${item.title}</a>
+                                <a href="/article/${item.id}">${item.title}</a>
                             </h3>
                             <p class="repo-list-description">${item.description}</p>
                             <p class="repo-list-meta">
@@ -20,7 +20,7 @@
                                     <#list item.tags as tag>
                                         <span class="meta-info">
                                         <span class="octicon octicon-file-directory"></span>
-                                        <a href="https://ebay-cloud.com/categories/#${tag.name}" title="${tag.name}">${tag.name}</a>
+                                        <a href="${config.siteUrl}/tag/${tag.id}" title="${tag.name}">${tag.name}</a>
                                         </span>
                                     </#list>
                                 <#else>

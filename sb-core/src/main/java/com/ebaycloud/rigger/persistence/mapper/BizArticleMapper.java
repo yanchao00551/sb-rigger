@@ -38,4 +38,11 @@ public interface BizArticleMapper extends BaseMapper<BizArticle> {
      * @return java.util.List<com.ebaycloud.rigger.persistence.beans.BizArticle>
      */
     List<BizArticle> listTagsByArticleId(List<Long> list);
+
+    /**
+     * 获取热门文章
+     *
+     * @return
+     */
+    List<BizArticle> listHotArticle();
 }

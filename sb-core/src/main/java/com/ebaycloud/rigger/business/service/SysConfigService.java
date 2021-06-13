@@ -1,5 +1,7 @@
 package com.ebaycloud.rigger.business.service;
 
+import com.ebaycloud.rigger.persistence.beans.SysConfig;
+
 import java.util.Map;
 
 /**
@@ -23,4 +25,15 @@ public interface SysConfigService {
     Map<String,Object> getConfigs();
 
 
+    /**
+     * 获取网站详情
+     */
+    Map<String, Object> getSiteInfo();
+
+    /**
+     * 获取单个配置
+     *
+     * @param key key
+     */
+    SysConfig getByKey(String key);
 }
